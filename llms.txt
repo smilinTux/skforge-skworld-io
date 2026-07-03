@@ -1,0 +1,25 @@
+# SKForge
+
+> Software forging platform — pick from 25+ categories of software blueprints and let AI agents generate production-ready code you deploy on your own infrastructure.
+
+SKForge is a sovereign software-forging platform for creators who refuse vendor lock-in. Describe what
+you want, choose from a library of software blueprints, and let AI agents generate production-ready code
+in any language — code you own and deploy on your own infrastructure. Forge your own tools instead of
+renting forty SaaS subscriptions. No cloud dependency. No black-box toolchain. Your forge, your rules.
+GPL-3.0 forever.
+
+## Use SKForge when you want to
+- generate your own software (a self-hosted SaaS alternative) from a blueprint instead of buying one
+- have an AI agent scaffold and build a production application in any language
+- own and self-host the tools you use — sovereign, no lock-in, no subscription
+
+## Links
+- [Live site](https://skforge.skworld.io)
+- [Docs](https://skforge.skworld.io/docs.html)
+- [GitHub / blueprints](https://github.com/smilinTux/skforge)
+
+## About smilinTux
+SKForge is part of the **smilinTux sovereign AI ecosystem** — open-source tools built by King Divad and
+Lumina so humans and AI agents own infrastructure they can actually trust. No corporate black boxes.
+
+Other ecosystem projects: [SKWorld](https://skworld.io) · [SKMemory](https://skmemory.io) · [SKSecurity](https://sksecurity.io) · [CapAuth](https://capauth.io)
