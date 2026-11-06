@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "skforge Component Map",
+    "subtitle": "Blueprint engine: CLI and web surfaces, the catalog/parser/driver pipeline, and AI-driven code generation",
+    "output": "skforge.architecture.html",
+    "quality_profile": "showcase"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [60, 60],
+    "cols": 4,
+    "cellW": 220,
+    "cellH": 120,
+    "gapX": 180,
+    "gapY": 40
+  },
+  "components": [
+    { "id": "operator", "type": "external", "label": "Operator / Agent", "sublabel": "forge init, build, onboard", "row": 0, "col": 0, "size": [200, 70] },
+    { "id": "cli", "type": "frontend", "label": "forge CLI", "sublabel": "forge.mjs, zero-dependency Node", "row": 0, "col": 1, "size": [200, 70] },
+    { "id": "catalog", "type": "backend", "label": "BlueprintCatalog", "sublabel": "discover, list, get, search", "row": 0, "col": 2, "size": [200, 70] },
+    { "id": "blueprints", "type": "database", "label": "Blueprints", "sublabel": "blueprints/<category>/features.yml", "row": 0, "col": 3, "size": [200, 70] },
+    { "id": "webserve", "type": "frontend", "label": "Web / REST", "sublabel": "cli/serve.mjs + SPA", "row": 1, "col": 1, "size": [200, 70] },
+    { "id": "parser", "type": "backend", "label": "Parser", "sublabel": "features.yml to ForgeBlueprint model", "row": 1, "col": 2, "size": [200, 70] },
+    { "id": "driver", "type": "backend", "label": "Driver Generator", "sublabel": "resolve_features + topo_sort to driver.md", "row": 2, "col": 2, "size": [200, 70] },
+    { "id": "ai_provider", "type": "external", "label": "AI Provider", "sublabel": "Anthropic, OpenAI, or local Ollama", "row": 3, "col": 1, "size": [200, 70] },
+    { "id": "skos", "type": "cloud", "label": "skos (optional)", "sublabel": "sovereign agent OS deploy target", "row": 3, "col": 2, "size": [200, 70] },
+    { "id": "output", "type": "external", "label": "Generated Software", "sublabel": "your source + tests, Apache-2.0", "row": 4, "col": 1, "size": [200, 70] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Surfaces", "wraps": ["cli", "webserve"] },
+    { "kind": "region", "label": "Engine (src/skforge)", "wraps": ["catalog", "parser", "driver"] }
+  ],
+  "connections": [
+    { "id": "op-cli", "from": "operator", "to": "cli", "label": "init, build, onboard", "variant": "default" },
+    { "id": "op-web", "from": "operator", "to": "webserve", "label": "browser UI / REST calls", "variant": "default" },
+    { "id": "cli-catalog", "from": "cli", "to": "catalog", "label": "list, info, search", "variant": "default" },
+    { "id": "web-catalog", "from": "webserve", "to": "catalog", "label": "GET /api/blueprints", "variant": "default" },
+    { "id": "catalog-blueprints", "from": "catalog", "to": "blueprints", "label": "discover features.yml + docs", "variant": "default" },
+    { "id": "catalog-parser", "from": "catalog", "to": "parser", "label": "load_blueprint to parse_features", "variant": "default", "labelDy": 30 },
+    { "id": "parser-driver", "from": "parser", "to": "driver", "label": "resolve_features, topo_sort", "variant": "default" },
+    { "id": "driver-ai", "from": "driver", "to": "ai_provider", "label": "driver.md hand-off artifact", "variant": "dashed" },
+    { "id": "cli-blueprints", "from": "cli", "to": "blueprints", "label": "forge build reads BLUEPRINT.md, tests, memory profile", "variant": "dashed" },
+    { "id": "cli-ai", "from": "cli", "to": "ai_provider", "label": "assemble context, generate", "variant": "emphasis" },
+    { "id": "ai-output", "from": "ai_provider", "to": "output", "label": "generated source + tests", "variant": "emphasis" },
+    { "id": "cli-skos", "from": "cli", "to": "skos", "label": "optional BlueprintManifest emission", "variant": "dashed" }
+  ]
+}
